@@ -27,3 +27,7 @@ INSERT INTO bikes (type, size) VALUES ('BMX', 19), ('BMX', 20), ('BMX', 21);
 
 -- Rest is done in bash
 -- connect to the database bikes to proceed whenever you close programming and want to continue with the next steps
+UPDATE bikes SET available = FALSE WHERE available = TRUE;
+UPDATE bikes SET available = TRUE WHERE type != 'BMX';
+INSERT INTO customers name
+SELECT * FROM bikes LEFT JOIN rentals USING (bike_id); 
