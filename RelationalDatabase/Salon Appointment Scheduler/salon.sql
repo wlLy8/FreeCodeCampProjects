@@ -15,7 +15,7 @@ CREATE DATABASE salon;
 
 CREATE TABLE customers (customer_id SERIAL PRIMARY KEY,
     phone VARCHAR(15) NOT NULL UNIQUE,
-    name VARCHAR(40) NOT NULL);
+    name VARCHAR(40));
 
 
 CREATE TABLE appointments (
@@ -31,3 +31,4 @@ CREATE TABLE services (service_id SERIAL PRIMARY KEY,
     );
 
 INSERT INTO services (name) VALUES ('Cut'), ('Color'), ('Trim');
+SELECT * FROM services;
