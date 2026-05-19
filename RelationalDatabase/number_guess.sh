@@ -1,0 +1,3 @@
+#!/bin/bash
+
+NUMBER_TO_GUESS=$RANDOM
