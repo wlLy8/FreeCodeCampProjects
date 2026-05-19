@@ -11,7 +11,6 @@ fi
 
 if [[ -n $INPUT ]]
 then
-    echo "Will proceess."
     ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE elements::text ~ '\y${INPUT}\y';")
     
     if [[ -z $ATOMIC_NUMBER ]]
@@ -20,7 +19,8 @@ then
         exit
     fi
 
-    TYPE=$($PSQL "SELECT type FROM properties WHERE atomic_number = $ATOMIC_NUMBER;")
+    TYPE_NUMBER=$($PSQL "SELECT type_id FROM properties WHERE atomic_number = $ATOMIC_NUMBER;")
+    TYPE=$($PSQL "SELECT type FROM types WHERE type_id = $TYPE_NUMBER;")
     ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number = $ATOMIC_NUMBER;")
     MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number = $ATOMIC_NUMBER;")
     BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number = $ATOMIC_NUMBER;")
