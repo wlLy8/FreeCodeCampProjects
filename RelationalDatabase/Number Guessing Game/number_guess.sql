@@ -9,5 +9,6 @@ CREATE TABLE games(
     game_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     number_of_guesses INT NOT NULL,
+    games_played INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
