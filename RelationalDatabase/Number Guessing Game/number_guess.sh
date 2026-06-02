@@ -5,7 +5,7 @@ SECRET_NUMBER=$RANDOM
 # SECRET_NUMBER=2
 
 USER_INTERACTION(){
-    echo "Enter you username:"
+    echo "Enter your username:"
     read USERNAME
     USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME';")
     # GAMES_PLAYED=$($PSQL "SELECT COUNT(*) FROM games WHERE user_id='$USER_ID';")
@@ -15,10 +15,10 @@ USER_INTERACTION(){
 
     if [[ -z $USER_ID ]]
     then
-        echo "Welcome back $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
-    else
         echo "Welcome, $USERNAME! It looks like this is your first time here."
         INSERT_USERNAME=$($PSQL "INSERT INTO users (username) VALUES ('$USERNAME');")
+    else
+        echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
     fi
 
 
@@ -44,7 +44,7 @@ USER_INTERACTION(){
         fi
     done
 
-    if [[ -n $USER_ID && NUMBER_OF_GUESSES -lt $BEST_CURRENT_GAME ]]
+    if [[ -n $USER_ID && $NUMBER_OF_GUESSES -lt $BEST_CURRENT_GAME ]]
     then
         UPDATE_FINISHED_GAME=$($PSQL "UPDATE games SET number_of_guesses = $NUMBER_OF_GUESSES, games_played = games_played + 1 WHERE user_id = '$USER_ID';")
     else
